@@ -1,0 +1,33 @@
+snippet :f
+  ${1}: function(${2}){
+    ${0}
+  }
+
+snippet func
+  function ${1}(${2}) {
+    ${0}
+  }
+
+snippet func2
+  function(${1}) {${2}};
+
+snippet proto
+  ${1}.prototype.${2} = function(${3}) {
+    ${0}
+  };
+
+snippet if
+  if (${1:condition}) {${2}};
+
+snippet ife
+  if (${1:condition}) {${2}} else{};
+
+snippet for
+  for (var ${1:i}=0; $2 < ${2}.length; $2++) {
+    ${0}
+  };
+
+snippet forin
+  for (var ${2:i} in ${1}) {
+    ${0}
+  };

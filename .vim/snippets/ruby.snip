@@ -1,0 +1,198 @@
+snippet class
+  class ${1}
+    ${0}
+  end
+
+snippet def
+  def ${1}
+    ${0}
+  end
+
+snippet inject
+abbr inject(n) do end
+  inject(${1:initial}) { |${2}, ${3}| ${4:block} }
+
+snippet begin
+abbr begin rescue end
+  begin
+    ${1}
+  rescue
+    ${2}
+  end
+
+snippet each
+  ${1:collection}.each do |${2:member}|
+    ${0}
+  end
+
+snippet if
+  if ${1:condition}
+    ${0}
+  end
+
+snippet ife
+  if ${1:condition}
+    ${2}
+  else
+    ${3}
+  end
+
+snippet unless
+  unless ${1:condition}
+    ${0}
+  end
+
+snippet while
+  while ${1:condition}
+    ${0}
+  end
+
+snippet case
+  case ${1}
+  when ${2}
+    ${3}
+  end
+
+snippet encode
+  # -*- coding: utf-8 -*-
+
+# japanese match
+snippet     match_japanese
+abbr        match_japanese
+options     word
+  /[ぁ-んァ-ヴ一-龠亜-煕]/u
+
+# / Ruby
+
+# Rails
+
+snippet scope
+  scope ${1:name}, -> (${2:args}) do
+    ${3:condition}
+  end
+
+snippet vp
+  validates :${1:column}, presence: true
+
+snippet vn
+  validates :${1:column}, numericality: true
+
+snippet vn2
+  validates :${1:column}, numericality: { allow_blank: true, only_integer: true }
+
+snippet vu
+  validates :${1:column}, uniqueness: true
+
+snippet vl
+  validates :${1:column}, length: { maximum: ${2:size} }
+
+snippet vl2
+  validates :${1:column}, length: { within: ${2:start}..${3:end} }
+
+snippet vi
+  validates :${1:column}, inclusion: { in: ${2:range} }
+
+snippet vf
+  validates :${1:column}, format: { with: ${2:format} }
+
+snippet     concern
+abbr        extend ActiveSupport::Concern
+options     word
+  extend ActiveSupport::Concern
+
+# / Rails
+
+# gem
+snippet     binding
+abbr        binding
+alias       pry
+options     word
+  binding.pry;
+# / gem
+
+# RSpec
+snippet desc
+  describe '${1:name}' do
+    ${2}
+  end
+alias desc describe
+
+snippet desccon
+  describe '${1:GET|POST|PUT|DELETE} ${2:/some/path}${3}' do
+    ${4}
+  end
+
+snippet context
+  context '${1}' do
+    ${2}
+  end
+
+snippet before
+  before do
+    ${0}
+  end
+
+snippet it
+  it '${1}' do
+    ${0}
+  end
+
+snippet be_t
+  be_truthy
+
+snippet be_f
+  be_falsy
+
+snippet subject
+  subject { ${1:FactoryGirl.create(:${2:name\})} }
+
+snippet subject2
+  subject { ${1:FactoryGirl.build(:${2:name\})} }
+
+snippet cona
+  context 'after #${1:save!}' do
+    before do
+      subject.$1
+    end
+    ${2}
+  end
+
+snippet change
+  expect {
+    ${1}
+  }.to change(${2:described_class}, :count).by(${3:1})
+
+snippet shared_context
+  shared_context '${1:condition}', :${2:key} => ${3:value} do
+    ${4}
+  end
+
+snippet shared_context_u
+  include_context '${1}'
+
+snippet shared_examples
+  shared_examples '${1:do something}' do
+      ${2}
+  end
+
+snippet st
+  stub(:${1:method}).and_returns(${2:return})
+
+snippet shared_examples_u
+  it_behaves_like '${1}'
+
+snippet ibl
+  it_behaves_like '${1}'
+
+# / RSpec
+
+# FactoryGirl
+snippet fgb
+  FactoryGirl.build(:${1})
+
+snippet fgc
+  FactoryGirl.create(:${1})
+
+snippet fgs
+  sequence(:${1}) {|n| '${2}#{n}'}
+# / FactoryGirl

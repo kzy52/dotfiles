@@ -1,0 +1,7 @@
+## Terminal Colorの設定
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+## vim
+alias vi='/usr/bin/vim'
+alias vim='/usr/bin/vim'

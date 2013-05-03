@@ -1,0 +1,181 @@
+" matchit.vim {{{
+source $VIMRUNTIME/macros/matchit.vim
+" }}} / matchit.vim
+
+
+" Basic Settings {{{
+set autoread " 自動読み直し
+set backspace=indent,eol,start "バックスペースキーで削除できるものを指定
+let mapleader="," " <Leader>キー
+set modelines=0 " モードラインは無効
+set scrolloff=5 " スクロール時の余白確保
+set showcmd " コマンドをステータス行に表示
+set showmode " 現在のモードを表示
+set textwidth=0 " 自動で折り返しをしない
+set ttyfast " 高速ターミナル接続を行う
+set vb t_vb= " ビープ音を鳴らさない
+set whichwrap=b,s,h,l,<,>,[,] " カーソルを行頭、行末で止まらないようにする
+" }}} / Basic Settings
+
+
+" Encode Settings {{{
+set encoding=utf-8 " デフォルトエンコーディング
+set fileformats=unix,dos,mac " 改行コード
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc  " ワイルドカードで表示するときに優先度を低くする拡張子
+" }}} / Encode Settings
+
+
+" Display Settings {{{
+" set cursorline " カーソル行をハイライト 重い...
+set laststatus=2 " 常にステータラスラインを表示
+set list " 不可視文字表示
+" set listchars=tab:>\ ,extends:<
+set listchars=tab:>-,trail:-,extends:>,precedes:<
+set number " 行番号表示
+set ruler " ルーラーを表示
+set showmatch " 対応する括弧をハイライト
+set title " タイトルを表示する
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=red guibg=darkgray
+match ZenkakuSpace /　/
+" }}} / Display Settings
+
+
+" Color Settings {{{
+if &t_Co > 1
+  syntax enable
+endif
+
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
+" }}} / Color Settings
+
+
+" Clipboard Settings {{{
+set clipboard=unnamed " コピーしたものがレジスタにも入るようにする
+" }}} / Clipboard Settings
+
+
+" Backup Settings {{{
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+" }}} / Backup Settings
+
+
+" Indentation Settings {{{
+set autoindent
+" set cindent
+set smartindent
+
+" 1 tab == 2 spaces
+set tabstop=2
+set shiftwidth=2
+
+set expandtab
+set smarttab
+
+if has("autocmd")
+  autocmd FileType * set formatoptions-=ro " 改行時にコメントしない
+endif
+" }}} / Indentation Settings
+
+" Search Settings {{{
+set incsearch " インクリメンタルサーチ
+set ignorecase " 大文字小文字無視
+set hlsearch " 検索文字をハイライト
+set smartcase " 大文字は区別する
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " 検索結果ハイライトをESCキーの連打でリセットする
+" }}} / Search Settings
+
+
+" Complete Settings {{{
+set wildchar=<tab> " コマンド補完開始キー
+set wildmenu " コマンド補完を強化
+set wildmode=list:longest " リスト表示
+set history=1000 " コマンド・検索パターン履歴数
+" }}} / Complete Settings
+
+
+" Buffer Settings {{{
+set nohidden " 編集中でも他のファイルを開けないようにする
+noremap <Space> :bn!<CR>
+noremap <S-Space> :bp!<CR>
+" }}} / Buffer Settings
+
+
+" Window Settings {{{
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sH <C-w>H
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+
+" height
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+" width
+nnoremap ) <C-w>>
+nnoremap ( <C-w><LT>
+" }}} / Window Settings
+
+
+" Other Settings {{{
+" インサートモードでもhjklで移動
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
+"super jump
+nnoremap H 5h
+nnoremap L 5l
+nnoremap J <C-f>
+nnoremap K <C-b>
+
+" インサートモードを抜ける
+inoremap <silent> jj <esc>
+
+" 0, 9で行頭、行末へ
+nmap 0 ^
+nmap 9 $
+
+" ビジュアルモード時vで行末まで選択
+xnoremap v $h
+
+"挿入モードで",date",',time'で日付、時刻挿入
+inoremap <Leader>date <C-R>=strftime('%Y/%m/%d')<CR>
+inoremap <Leader>time <C-R>=strftime('%H:%M')<CR>
+
+" copypath
+function CopyPath()
+    let @*=expand('%:p')
+endfunction
+
+function CopyFileName()
+    let @*=expand('%:t')
+endfunction
+
+command! -nargs=0 CopyPath     call CopyPath()
+command! -nargs=0 CopyFileName call CopyFileName()
+
+nnoremap <silent>cp :CopyPath<CR>
+nnoremap <silent>cf :CopyFileName<CR>
+
+" http://vim-users.jp/2011/04/hack214/
+onoremap ) t)
+onoremap ( t(
+vnoremap ) t)
+vnoremap ( t(
+" }}} / Other Settings
+
+
+" Load Settings {{{
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
+" }}} / Load Settings

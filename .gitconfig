@@ -1,0 +1,36 @@
+[core]
+  editor = vim
+  precomposeunicode = true
+  quotepath = true
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+[color]
+  ui = auto
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
+[commit]
+  template = ~/dotfiles/.gitmessage
+[diff]
+  patience = true
+  renames = true
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  difff = diff --word-diff
+  lg = log --graph --all --decorate --abbrev-commit --branches --date=short --pretty=format:\"%C(red)%h%C(reset) %C(green)[%ad]%C(reset) %s %C(cyan)@%an%C(reset) %C(yellow)%d%C(reset)\"
+  tags = tag -l
+  graph = git log --graph --decorate --oneline
+
+  dm = diff master
+  dc = diff --cached         # addされているものとのdiff
+  d1 = diff HEAD~            # HEADから1つ前とdiff
+  d2 = diff HEAD~~           # HEADから2つ前とdiff
+[github]
+  user = kzy52
+[include]
+  path = ~/.gitconfig_local
