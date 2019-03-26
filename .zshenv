@@ -6,7 +6,7 @@ export LESSCHARSET=utf-8
 export EDITOR=vim
 
 ## zsh 設定ファイルパス
-export ZDOTDIR=~/dotfiles/.zsh
+export ZDOTDIR=~/.zsh
 
 ## 重複したパスを登録しない。
 typeset -U path

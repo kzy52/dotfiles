@@ -1,54 +1,60 @@
+export LC_ALL='ja_JP.UTF-8'
+
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
+export PATH=$PATH:./node_modules/.bin
 
 export EDITOR=vim
 
-## Alias
-
-### MacVim
+# MacVim
 if [[ -d /Applications/MacVim.app ]]; then
   alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
-  alias vi=vim
 fi
 
-### tmux
-alias tmux='$HOME/bin/tmuxx'
+# vim
+alias vi=vim
+alias vim=nvim
 
-### ag
-alias ag='ag -S --stats --pager "less -F"'
+# tmux
+ssh() {
+  # rename window title
+  if [[ -n $(printenv TMUX) ]]
+  then
+    local window_name=$(tmux display -p '#{window_name}')
+    tmux rename-window -- "$@[-1]"
+    command ssh $@
+    tmux rename-window $window_name
+  else
+    command ssh $@
+  fi
+}
+
+# ag
+## should `brew install ag`
+alias ag='ag -S'
 alias agh='ag --hidden'
 
-## zsh-completions
+# zsh-completions
 ## should `brew install zsh-completions`
 if [ -e /usr/local/share/zsh-completions ]; then
   fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
-## rbenv
+# aws cli
+## should `brew install awscli`
+if [ -e /usr/local/share/zsh/site-functions/_aws ]; then
+  source /usr/local/share/zsh/site-functions/_aws
+fi
+
+# rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-## pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
+# nodebrew
+if [ -d "${HOME}/.nodebrew" ]; then
+  export PATH="${HOME}/.nodebrew/current/bin:$PATH"
 fi
-alias brew="env PATH=${PATH/\/~\/\.pyenv\/shims:/} brew"
 
-## nodebrew
-# if [ -d "${HOME}/.nodebrew" ]; then
-#   export PATH="${HOME}/.nodebrew/current/bin:$PATH"
-# fi
+hash tmux 2>/dev/null && source "$ZDOTDIR/.tmux.zsh"
 
-## php
-# export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-
-## Hbase
-# export HBASE_HOME=/usr/local/opt/hbase/libexec
-# export PATH="${HBASE_HOME}/bin:$PATH"
-
-## Alias
-
-## Android
-# export ANDROID_HOME="$HOME/Applications/android-sdk-macosx"
-# export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+# powerline
+powerline-daemon -q

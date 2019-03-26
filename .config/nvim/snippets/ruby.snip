@@ -1,3 +1,6 @@
+snippet s
+  #{${1}}${0}
+
 snippet class
   class ${1}
     ${0}
@@ -53,8 +56,16 @@ snippet case
     ${3}
   end
 
-snippet encode
-  # -*- coding: utf-8 -*-
+snippet transaction
+  ActiveRecord::Base.transaction do
+  end
+
+snippet btransaction
+  begin
+    ActiveRecord::Base.transaction do
+    end
+  rescue => e
+  end
 
 # japanese match
 snippet     match_japanese
@@ -107,20 +118,16 @@ snippet     binding
 abbr        binding
 alias       pry
 options     word
-  binding.pry;
+  binding.pry
 # / gem
 
 # RSpec
 snippet desc
-  describe '${1:name}' do
-    ${2}
-  end
-alias desc describe
-
-snippet desccon
-  describe '${1:GET|POST|PUT|DELETE} ${2:/some/path}${3}' do
-    ${4}
-  end
+abbr    describe end
+prev_word '^'
+    describe '${1:name}' do
+        ${2}
+    end
 
 snippet context
   context '${1}' do
@@ -137,62 +144,72 @@ snippet it
     ${0}
   end
 
+snippet subject
+  subject { ${0} }
+
 snippet be_t
   be_truthy
 
 snippet be_f
   be_falsy
 
-snippet subject
-  subject { ${1:FactoryGirl.create(:${2:name\})} }
-
-snippet subject2
-  subject { ${1:FactoryGirl.build(:${2:name\})} }
-
-snippet cona
-  context 'after #${1:save!}' do
-    before do
-      subject.$1
-    end
-    ${2}
-  end
-
 snippet change
-  expect {
-    ${1}
-  }.to change(${2:described_class}, :count).by(${3:1})
+  expect { subject }.to change(${2:described_class}, :count).by(${3:1})
 
-snippet shared_context
-  shared_context '${1:condition}', :${2:key} => ${3:value} do
+snippet sc
+  shared_context '${1:condition}' do
     ${4}
   end
 
-snippet shared_context_u
+snippet sci
   include_context '${1}'
 
-snippet shared_examples
+snippet se
   shared_examples '${1:do something}' do
       ${2}
   end
 
-snippet st
-  stub(:${1:method}).and_returns(${2:return})
-
-snippet shared_examples_u
+snippet sei
   it_behaves_like '${1}'
 
-snippet ibl
-  it_behaves_like '${1}'
+snippet stub
+  allow(${1}).to receive(:${2}).and_return(${3})
 
+snippet mock
+  expect(${1}).to receive(:${2}).and_return(${3})
+
+snippet astub
+  allow_any_instance_of(${1}).to receive(:${2}).and_return(${3})
+
+snippet amock
+  expect_any_instance_of(${1}).to receive(:${2}).and_return(${3})
 # / RSpec
 
-# FactoryGirl
+# FactoryBot
 snippet fgb
-  FactoryGirl.build(:${1})
-
-snippet fgc
-  FactoryGirl.create(:${1})
+  FactoryBot.build(:${1})
 
 snippet fgs
+  FactoryBot.build_stubbed(:${1})
+
+snippet fgc
+  FactoryBot.create(:${1})
+
+snippet fga
+  FactoryBot.attributes_for(:${1})
+
+snippet fgseq
   sequence(:${1}) {|n| '${2}#{n}'}
-# / FactoryGirl
+
+snippet fgbl
+  let(:${1:model}) { FactoryBot.build(:${2}) }
+
+snippet fgsl
+  let(:${1:model}) { FactoryBot.build_stubbed(:${2}) }
+
+snippet fgcl
+  let(:${1:model}) { FactoryBot.create(:${2}) }
+
+snippet fgal
+  let(:${1:model}) { FactoryBot.attributes_for(:${2}) }
+# / FactoryBot

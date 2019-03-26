@@ -1,5 +1,5 @@
 [core]
-  editor = vim
+  editor = nvim
   precomposeunicode = true
   quotepath = true
   excludesfile = ~/.gitignore
@@ -12,16 +12,17 @@
   interactive = auto
   grep = auto
 [commit]
-  template = ~/dotfiles/.gitmessage
+  template = ~/.gitmessage
 [diff]
   patience = true
   renames = true
+  compactionHeuristic = true
 [alias]
   st = status
   ci = commit
   co = checkout
   br = branch
-  difff = diff --word-diff
+  cp = cherry-pick
   lg = log --graph --all --decorate --abbrev-commit --branches --date=short --pretty=format:\"%C(red)%h%C(reset) %C(green)[%ad]%C(reset) %s %C(cyan)@%an%C(reset) %C(yellow)%d%C(reset)\"
   tags = tag -l
   graph = git log --graph --decorate --oneline
@@ -30,7 +31,15 @@
   dc = diff --cached         # addされているものとのdiff
   d1 = diff HEAD~            # HEADから1つ前とdiff
   d2 = diff HEAD~~           # HEADから2つ前とdiff
-[github]
-  user = kzy52
+  difff = diff --word-diff
+
+  r   = reset
+  r1  = reset HEAD^
+  r2  = reset HEAD^^
+  rh  = reset --hard
+  rh1 = reset HEAD^ --hard
+  rh2 = reset HEAD^^ --hard
+
+  clear = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
 [include]
   path = ~/.gitconfig_local

@@ -1,16 +1,32 @@
 ### .zshrc.alias
 
 # ls
-alias la="ls -a"
-alias lf="ls -F"
-alias ll="ls -l"
+alias la='ls -a'
+alias lf='ls -F'
+alias ll='ls -l'
 
 # rails
 alias be='bundle exec'
 alias bi='bundle install'
 
+# docker-compose
+alias d='docker'
+alias dc='docker-compose'
+alias dca='docker-compose exec app'
+alias dcs='docker-compose exec spring'
+
+# git
+alias gi='git init'
+alias gs='git status'
+alias gb='git branch'
+alias ga='git add'
+alias gcm='git commit -m'
+
 # VimFiler
 alias f='vim +VimFiler'
+
+# tmux
+alias tmux='tmux -u'
 
 # grep
 alias 'gr'='grep --color=auto -ERUIn'

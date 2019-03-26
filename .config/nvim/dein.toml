@@ -1,0 +1,109 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+
+[[plugins]]
+repo = 'elzr/vim-json'
+hook_add = '''
+source ~/.config/nvim/plugins/vim-json.rc.vim
+'''
+
+[[plugins]]
+repo = 'mileszs/ack.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_event = 'BufRead'
+hook_add = '''
+source ~/.config/nvim/plugins/denite.rc.vim
+'''
+hook_post_source = '''
+call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_add = '''
+source ~/.config/nvim/plugins/neosnippet.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add = '''
+source ~/.config/nvim/plugins/vimfiler.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+source ~/.config/nvim/plugins/unite.rc.vim
+'''
+
+[[plugins]]
+repo = 'slim-template/vim-slim'
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+on_idle = 1
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+hook_add = '''
+source ~/.config/nvim/plugins/vim-airline.rc.vim
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'vim-scripts/Align'
+
+[[plugins]]
+repo = 'vim-scripts/AnsiEsc.vim'
+
+#[[plugins]]
+#repo = 'w0rp/ale'
+
+# for Ruby
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+# / for Ruby
+
+# for Syntax
+[[plugins]]
+repo = 'hail2u/vim-css3-syntax'
+
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+# / for Syntax
+
+# color schema
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+# / color schema
